@@ -10,9 +10,9 @@ wget http://mi.soi.city.ac.uk/datasets/magnatagatune/mp3.zip.002
 echo Downloading third archive...
 wget http://mi.soi.city.ac.uk/datasets/magnatagatune/mp3.zip.003
 echo Extracting archives...
-unzip mp3.zip.001
-unzip mp3.zip.002
-unzip mp3.zip.003
+unzip -qq mp3.zip.001
+unzip -qq mp3.zip.002
+unzip -qq mp3.zip.003
 
 echo Moving mp3 files to data/mp3
 find . -name "*.mp3" -exec mv "{}" ./ \;
@@ -23,21 +23,10 @@ cd ..
 mkdir csv/
 cd csv/
 wget http://he3.magnatune.com/info/song_info.csv
+cd ../..
 
-cd ..
-mkdir wav
-cd wav
-while read dirname others; do
-    mkdir "$dirname"
-done < ../../genres.txt
-cd ...
+./init_genre_dir.sh data/wav
 python3 util/make_wav.py
 
-cd data/
-mkdir spectogram
-cd spectogram
-while read dirname others; do
-    mkdir "$dirname"
-done < ../../genres.txt
-cd ...
+./init_genre_dir.sh data/spectogram
 python3 util/make_spectogram.py
