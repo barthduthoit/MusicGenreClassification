@@ -1,0 +1,10 @@
+Alt_Rock
+Ambient
+Classical
+Electro_Rock
+Electronica
+Hard_Rock
+Hip-Hop
+Jazz
+New_Age
+World
