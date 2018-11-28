@@ -1,9 +1,9 @@
-RESIZE = python3 util/resize.py
+init:
+	pip install -r requirements.txt
 
+data:
+	./init.sh
 
-default:
-	@echo '  >> make {resize}'
-
-resize:
-	./init_genre_dir.sh '${dir_path}_${factor}'
-	 ${RESIZE} $(factor) $(dir_path)
+clean:
+	rm -rf data/
+	rm logfile.log

@@ -1,7 +1,8 @@
 import pandas as pd
 import os
 import pydub
-
+from tqdm import tqdm
+from log import logger
 
 class Track:
     def __init__(self, s):
@@ -14,7 +15,7 @@ class Track:
         self.end = L[5]
 
 
-df = pd.read_csv("data/csv/song_info.csv", error_bad_lines=False)
+df = pd.read_csv("data/csv/song_info.csv", error_bad_lines=False, warn_bad_lines=False)
 
 df["albumname"] = df["albumname"].str.lower()
 df["artist"] = df["artist"].str.lower()
@@ -64,12 +65,15 @@ def get_genre(t):
 
 def make_wav():
     MP3s = [f for f in os.listdir("data/mp3/") if f.endswith('.mp3')]
-    for f in MP3s:
+    for f in tqdm(MP3s):
         genre = get_genre(Track(f))
         if genre is not None:
             genre = genre.replace(" ", '_')
-            mp3 = pydub.AudioSegment.from_mp3("data/mp3/" + f)
-            mp3.export("data/wav/{}/{}".format(genre, f.replace(".mp3", ".wav")), format="wav")
+            try:
+                mp3 = pydub.AudioSegment.from_mp3("data/mp3/" + f)
+                mp3.export("data/wav/{}/{}".format(genre, f.replace(".mp3", ".wav")), format="wav")
+            except pydub.exceptions.CouldntDecodeError:
+                logger.error("could not convert file {} to wav".format(f), exc_info=True)
 
 
 if __name__ == '__main__':
