@@ -1,6 +1,7 @@
 import scipy.io.wavfile
 import os
 import argparse
+from log import logger
 
 import matplotlib
 

@@ -6,16 +6,15 @@ from tqdm import tqdm
 
 # original size 432*288
 def resize(factor, dir_path):
-    new_dir = "{}_{}".format(dir_path, factor) + "/"
-    dir_path = dir_path + "/"
-    genres = [g for g in os.listdir(dir_path) if os.path.isdir(dir_path + g)]
-    for genre in tqdm(genres):
+    new_dir = "{}_{}".format(dir_path, factor)
 
-        PNGs = [f for f in os.listdir(dir_path + genre) if f.endswith(".png")]
-        for f in PNGs:
-            im = Image.open(dir_path + genre + "/" + f)
+    for root, _, files in tqdm(list(os.walk(dir_path)), desc='Looping genres'):
+        genre = os.path.basename(root)
+        genre_path = os.path.join(new_dir, genre)
+        for f in tqdm([f for f in files if f.endswith('.png')], desc=genre):
+            im = Image.open(os.path.join(root,f))
             im_resized = im.resize(tuple(int(ti / factor) for ti in im.size), Image.ANTIALIAS)
-            im_resized.save(new_dir + genre + "/" + f, "PNG")
+            im_resized.save(os.path.join(genre_path, f), "PNG")
 
 
 if __name__ == '__main__':
