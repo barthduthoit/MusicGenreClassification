@@ -105,3 +105,6 @@ venv.bak/
 
 # SWaP files
 .swp
+
+# Data files
+data/
