@@ -1,4 +1,6 @@
 mkdir -p data/mp3
+mkdir data/plots
+mkdir data/models
 echo Downloading first archive...
 wget -q --show-progress http://mi.soi.city.ac.uk/datasets/magnatagatune/mp3.zip.001 -P data/mp3
 echo Downloading second archive...

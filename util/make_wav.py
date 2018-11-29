@@ -4,6 +4,7 @@ import pydub
 from tqdm import tqdm
 from log import logger
 
+
 class Track:
     def __init__(self, s):
         L = s.replace(".wav", "").replace("_", " ").split("-")
@@ -23,6 +24,12 @@ df["trackname"] = df["trackname"].str.lower()
 
 
 def get_genre(t):
+    """
+    Returns the genre of a track based on data/csv/song_info.csv. Does not work for every track, but allows for a
+    decent amount of tracks to be labelled.
+    :param t: Track object
+    :return: track genre
+    """
     L1 = t.trackname.split(" ")
     L1.sort(key=len, reverse=True)
     L1 = L1[0:int(len(L1) * 0.2) + 1]
