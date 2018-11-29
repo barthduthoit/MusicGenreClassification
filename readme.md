@@ -1,4 +1,4 @@
-Music genre classification using Keras and the [MagnaTagATune dataset](http://mirg.city.ac.uk/codeapps/the-magnatagatune-dataset). I've included scripts to download the dataset and preprocess the data. My approach was to compute the spectograms of the songs to then train the neural networks on these spectograms.
+Music genre classification using Keras and the [MagnaTagATune dataset](http://mirg.city.ac.uk/codeapps/the-magnatagatune-dataset), as part of a paired research project. I've included scripts to download the dataset and preprocess the data. My approach was to compute the spectograms of the songs to then train the neural networks on these spectograms.
 
 ### Instructions
 
