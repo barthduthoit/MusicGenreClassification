@@ -2,6 +2,7 @@ from keras.models import Sequential
 from keras.layers.convolutional import Conv2D, MaxPooling2D
 from keras.layers.core import Dense, Flatten
 from keras.layers.recurrent import LSTM
+from keras.layers.convolutional_recurrent import ConvLSTM2D
 
 
 def get_CNN(input_shape):
@@ -27,7 +28,6 @@ def get_CNN(input_shape):
 
 
 def get_LSTM(input_shape):
-    print(input_shape)
     model = Sequential()
 
     model.add(LSTM(units=128, dropout=0.05, recurrent_dropout=0.35, return_sequences=True, input_shape=input_shape))

@@ -31,7 +31,7 @@ def load_spectograms(dir_path, reshape=False, test_size=.15):
         if "greys" in root:
             colour_flag = cv2.IMREAD_GRAYSCALE
         else:
-            colour_flag = cv2.MREAD_COLOR
+            colour_flag = cv2.IMREAD_COLOR
         for f in tqdm([f for f in files if f.endswith('.png')], desc=genre):
             img = cv2.imread(os.path.join(root, f), colour_flag)
             X.append(img)

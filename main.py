@@ -12,10 +12,15 @@ def main(nn_type, dir_path):
     elif nn_type == "LSTM":
         X_train, X_test, y_train, y_test = util.utils.load_spectograms(dir_path, reshape=False)
         model = util.NNs.get_LSTM(X_train[0].shape)
+    elif nn_type == "conv_LSTM":
+        X_train, X_test, y_train, y_test = util.utils.load_spectograms(dir_path, reshape=False)
+        model = util.NNs.get_conv_LSTM(X_train[0].shape)
 
     history = model.fit(X_train, y_train, batch_size=128, epochs=10, verbose=1, validation_data=(X_test, y_test))
 
     name = "{}_{}".format(os.path.basename(dir_path), nn_type)
+    model.save(name)
+
     util.utils.plot_history(history.history, name)
 
     y_pred = model.predict_classes(X_test, verbose=0)
